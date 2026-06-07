@@ -3,4 +3,6 @@ numpy
 scikit-learn
 matplotlib
 notebook
+python-box
+ensure
 -e .

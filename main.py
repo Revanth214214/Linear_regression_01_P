@@ -1,4 +1,14 @@
+from Linear_regression_01.components.data_ingestion import DataIngestion
+from Linear_regression_01.pipeline.stage_01_DI import DataIngestionTrainingPipeline
 from Linear_regression_01.logging import logger
 
-logger.info("Testing logger...")
-logger.info("If you see these lines in terminal and a log file, your logger installation is success..")
+STAGE_NAME = "Data Ingestion Stage"
+try:
+    logger.info(f">>>>>> Stage {STAGE_NAME} Started <<<<<<<<<<")
+    data_injestion = DataIngestionTrainingPipeline()
+    data_injestion.main()
+    logger.info(f">>>>>>>>> Stage {STAGE_NAME} Completed <<<<<<<<<<")
+
+except Exception as e:
+    logger.exception(e)
+    raise e
