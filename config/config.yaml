@@ -5,3 +5,9 @@ data_ingestion:
   source_URL: https://raw.githubusercontent.com/ageron/handson-ml2/master/datasets/housing/housing.tgz #dataset_url
   local_data_file: artifacts/data_ingestion/data.tar.gz #downloading in compessed format to the place where the local_data_file specifies
   unzip_dir: artifacts/data_ingestion #extracting the data from the compressed folder to feed to the model
+
+data_validation:
+  root_dir: artifacts/data_validation # where we want to create our directory
+  STATUS_FILE: artifacts/data_validation/status.txt #what type of file we want to create
+  #unzip_dir: artifacts/data_ingestion/housing.csv # which file to read and where it is
+  ALL_REQUIRED_FILES : ['housing.csv']

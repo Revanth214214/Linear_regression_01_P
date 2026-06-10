@@ -1,6 +1,6 @@
 import os
 import urllib.request as request
-import zipfile
+import tarfile
 from Linear_regression_01.logging import logger
 from Linear_regression_01.utils.common import get_size
 from Linear_regression_01.entity.config_entity import DataIngestionConfig
@@ -20,3 +20,15 @@ class DataIngestion:
             logger.info(f"{filename} Downloaded with following info \n{headers}")
         else:
             logger.info(f"file already exist of size: {get_size(Path(self.config.local_data_file))}")
+    
+    def extract_zip_file(self):
+        """
+        Extracts the tgz file into the unzip directory
+        """
+        unzip_path = "artifacts/data_ingestion"
+        os.makedirs(unzip_path, exist_ok=True)
+
+        logger.info(f"Extracting {self.config.local_data_file} to {unzip_path}...")
+        with tarfile.open(self.config.local_data_file, "r:gz") as tar_ref:
+            tar_ref.extractall(path=unzip_path)
+        logger.info("Extraction complete!")

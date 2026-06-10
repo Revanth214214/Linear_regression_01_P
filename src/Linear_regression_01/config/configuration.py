@@ -2,15 +2,18 @@ from Linear_regression_01.logging import logger
 from Linear_regression_01.constant import *
 from Linear_regression_01.utils.common import read_yaml, create_directories
 from Linear_regression_01.entity.config_entity import DataIngestionConfig
+from Linear_regression_01.entity.config_entity import DataValidationConfig
 
 class configurationManager:
     def __init__(
         self,
         config_filepath = CONFIG_FILE_PATH,     # Access to constants
-        params_filepath = PARAMS_FILE_PATH):
+        params_filepath = PARAMS_FILE_PATH,
+        schema_filepath = SCHEMA_FILE_PATH):
 
         self.config = read_yaml(config_filepath) # read all config and params yaml files
         self.params = read_yaml(params_filepath)
+        self.schema = read_yaml(schema_filepath)
 
         create_directories([self.config.artifacts_root])
 
@@ -26,3 +29,19 @@ class configurationManager:
         )
 
         return data_ingestion_config
+    
+    
+    def get_data_validation_config(self) -> DataValidationConfig:
+        config = self.config.data_validation
+        schema = self.schema.COLUMNS
+
+        create_directories([config.root_dir])
+
+        data_validation_config = DataValidationConfig(
+            root_dir = config.root_dir,
+            STATUS_FILE = config.STATUS_FILE,
+            ALL_REQUIRED_FILES = config.ALL_REQUIRED_FILES,
+            all_schema = schema
+        )
+
+        return data_validation_config
