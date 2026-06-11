@@ -11,3 +11,8 @@ data_validation:
   STATUS_FILE: artifacts/data_validation/status.txt #what type of file we want to create
   #unzip_dir: artifacts/data_ingestion/housing.csv # which file to read and where it is
   ALL_REQUIRED_FILES : ['housing.csv']
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  data_path: artifacts/data_ingestion/housing.csv
+  STATUS_FILE: artifacts/data_validation/status.txt

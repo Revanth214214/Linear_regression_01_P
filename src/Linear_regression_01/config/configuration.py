@@ -3,6 +3,7 @@ from Linear_regression_01.constant import *
 from Linear_regression_01.utils.common import read_yaml, create_directories
 from Linear_regression_01.entity.config_entity import DataIngestionConfig
 from Linear_regression_01.entity.config_entity import DataValidationConfig
+from Linear_regression_01.entity.config_entity import DataTransformationConfig
 
 class configurationManager:
     def __init__(
@@ -45,3 +46,17 @@ class configurationManager:
         )
 
         return data_validation_config
+    
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        config = self.config.data_transformation
+        schema = self.schema.COLUMNS
+
+        create_directories([config.root_dir])
+
+        data_transformation_config = DataTransformationConfig(
+            root_dir = config.root_dir,
+            STATUS_FILE = config.STATUS_FILE,
+            data_path = config.data_path,
+        )
+
+        return data_transformation_config

@@ -14,3 +14,9 @@ class DataValidationConfig:
     STATUS_FILE: str
     ALL_REQUIRED_FILES: List[str]
     all_schema: Dict[str, str]
+
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    root_dir: Path
+    data_path: Path
+    STATUS_FILE: Path
